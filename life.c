@@ -10,11 +10,22 @@ int main() {
     keypad(stdscr, TRUE);
     nodelay(stdscr, TRUE);
 
+    start_color();
+    assume_default_colors(COLOR_WHITE, COLOR_BLACK);
+    init_pair(1, COLOR_WHITE, COLOR_BLACK);
+    attron(COLOR_PAIR(1));
+    bkgd(COLOR_PAIR(1));
+
     int height, width;
     getmaxyx(stdscr, height, width);
 
     int (*grid)[width] = malloc(sizeof(int[height][width]));
     int (*new_grid)[width] = malloc(sizeof(int[height][width]));
+
+    if (!grid || !new_grid) {
+        endwin();
+        return 1;
+    }
 
     srand(time(NULL));
     for (int i = 0; i < height; i++) {
@@ -47,12 +58,18 @@ int main() {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 grid[y][x] = new_grid[y][x];
-                mvaddch(y, x, grid[y][x] ? '#' : ' ');
+                if (grid[y][x]) {
+                    attron(A_REVERSE);
+                    mvaddch(y, x, ' ');
+                    attroff(A_REVERSE);
+                } else {
+                    mvaddch(y, x, ' ');
+                }
             }
         }
 
         refresh();
-        usleep(50000);
+        usleep(60000);
     }
 
     free(grid);
