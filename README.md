@@ -3,6 +3,8 @@
 This is a C implementation of John Conway’s "Game of Life," a famous mathematical concept from 1970. 
 It’s a cellular automaton where complex patterns emerge from a few simple rules.
 
+![Banner](~/b301102.png)
+
 The program uses the ncurses library to render the simulation directly in your terminal.
 
 
