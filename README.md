@@ -35,11 +35,11 @@ Setup and Launch
 
 1. Compile the source code:
 
-	gcc main.c -lncurses -o life
+		gcc life.c -lncurses -o life
 
 2. Run the game:
 
-    ./life
+    	./life
 
 3. To stop the simulation, just press any key.
 
